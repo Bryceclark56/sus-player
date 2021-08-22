@@ -11,7 +11,7 @@ async fn main() -> tide::Result<()> {
     println!("Initializing Sus Player");
 
     let mut app = tide::new();
-    app.at("/sus/meeting").post(verify_imposter);
+    app.at("/sus/meeting").get(verify_imposter);
     app.listen("127.0.0.1:50010").await?;
 
     Ok(())
