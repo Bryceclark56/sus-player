@@ -1,3 +1,4 @@
+use std::env;
 use std::fs::File;
 use std::io::BufReader;
 use async_std::task;
@@ -24,7 +25,7 @@ async fn verify_imposter(_req: Request<()>) -> tide::Result {
         let (_stream, stream_handle) = OutputStream::try_default().unwrap();
         let sink = Sink::try_new(&stream_handle).unwrap();
 
-        let file = BufReader::new(File::open("./test").unwrap());
+        let file = BufReader::new(File::open(env::var("SUS_NOISE").unwrap()).unwrap());
 
         let source = Decoder::new(file).unwrap();
 
